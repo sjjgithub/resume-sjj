@@ -5,7 +5,6 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Link
 } from 'react-router-dom';
 import routers from './router/router';
 import NotFound from './pages/404/notFound';
@@ -21,28 +20,28 @@ function getConfirmation(message: any, callback: Function) {
 const supportsHistory = 'pushState' in window.history;
 const App: React.FC = () => {
   return (
-    <Router 
-          basename=""
-          getUserConfirmation={getConfirmation}
-          forceRefresh={!supportsHistory}
-          keyLength={12}
+    <Router
+      basename=""
+      getUserConfirmation={getConfirmation}
+      forceRefresh={!supportsHistory}
+      keyLength={12}
     >
       <div className="App">
         <Layout>
           <Header className="header" style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
             <div className="logo" ></div>
-            <HerderMenu/>
+            <HerderMenu />
           </Header>
-          <Layout style={{ position: 'fixed', zIndex: 1, width: '100%', top: '64px', height: 'calc(100% - 100px)', overflow: 'auto' }}>
-            <Sider>
-              <SlideMenus/>
-            </Sider> 
-            <Layout style={{ padding: '0 24px 24px' }}>
-              <Breadcrumb style={{ margin: '16px 0' }}>
-                <Breadcrumb.Item>Home</Breadcrumb.Item>
-                <Breadcrumb.Item>List</Breadcrumb.Item>
-                <Breadcrumb.Item>App</Breadcrumb.Item>
-              </Breadcrumb>
+          <Content style={{ padding: '0 50px', position: 'fixed', zIndex: 1, width: '100%', top: '64px', height: 'calc(100% - 100px)', overflow: 'auto'  }}>
+            <Breadcrumb style={{ margin: '16px 0' }}>
+              <Breadcrumb.Item>Home</Breadcrumb.Item>
+              <Breadcrumb.Item>List</Breadcrumb.Item>
+              <Breadcrumb.Item>App</Breadcrumb.Item>
+            </Breadcrumb>
+            <Layout style={{ padding: '24px 0', background: '#fff' , minHeight: 'calc(100% - 53px)'}}>
+              <Sider>
+                <SlideMenus/>
+              </Sider> 
               <Content
                 style={{
                   background: '#fff',
@@ -51,25 +50,6 @@ const App: React.FC = () => {
                   minHeight: 280,
                 }}
               >
-
-                <nav className="navbar navbar-inverse" >
-                  <div className="container-fluid">
-                    <ul className="nav navbar-nav" >
-                      <li>
-                        <Link to="/">首页</Link>
-                      </li>
-                      <li>
-                        <Link to="/detail/66">战队介绍</Link>
-                      </li>
-                      <li>
-                        <Link to="/video">视频</Link>
-                      </li>
-                      <li>
-                        <Link to="/login">登录</Link>
-                      </li>
-                    </ul>
-                  </div>
-                </nav>
                 <Switch>
                   {
                     routers.map((route, index) => {
@@ -84,10 +64,9 @@ const App: React.FC = () => {
                   }
                   <Route component={NotFound} />
                 </Switch>
-
               </Content>
             </Layout>
-          </Layout>
+          </Content>
         </Layout>
       </div>
     </Router>

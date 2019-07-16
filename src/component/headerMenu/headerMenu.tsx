@@ -3,7 +3,7 @@ import mockjs from 'mockjs';
 import { Menu } from 'antd';
 import {Link} from 'react-router-dom';
 export default class HerderMenu extends React.Component {
-  private menuItems = mockjs.mock({ 'data|2': [{ 'name|+1': ['home', 'detail'], 'path|+1': ['/', '/detail/22'] }] }).data;;
+  private menuItems = mockjs.mock({ 'data|2': [{ 'name|+1': ['我的主页', '我的项目经验'], 'path|+1': ['/', '/detail/22'] }] }).data;;
   render() {
     return (
       <Menu
