@@ -3,15 +3,14 @@ import './App.css';
 import { hot } from 'react-hot-loader';
 import {
   BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
+  Link,
+  Route
 } from 'react-router-dom';
 import routers from '../src/router';
-import NotFound from './pages/404';
 import HerderMenu from './component/headerMenu';
 import { Layout, Breadcrumb } from 'antd';
 import RoutesEach from './component/routesEach';
+import mockjs from 'mockjs';
 const { Header, Content } = Layout;
 function getConfirmation(message: any, callback: Function) {
   const allowTransition = window.confirm(message);
@@ -19,6 +18,7 @@ function getConfirmation(message: any, callback: Function) {
 }
 const supportsHistory = 'pushState' in window.history;
 const App: React.FC = () => {
+  const menuItems = mockjs.mock({ 'data|2': [{ 'name|+1': ['我的主页', '我的项目经验'], 'path|+1': ['/home', '/projects'] }] }).data;;
   return (
     <Router
       basename=""
@@ -26,22 +26,30 @@ const App: React.FC = () => {
       forceRefresh={!supportsHistory}
       keyLength={12}
     >
-      <div className="App">
+
+      <div className="App" >
         <Layout>
-          <Header className="header" style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
-            <div className="logo" ></div>
-            <HerderMenu />
-          </Header>
-          <Content style={{ padding: '0 50px', position: 'fixed', zIndex: 1, width: '100%', top: '64px', height: 'calc(100% - 100px)', overflow: 'auto' }}>
-            <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>Home</Breadcrumb.Item>
-              <Breadcrumb.Item>List</Breadcrumb.Item>
-              <Breadcrumb.Item>App</Breadcrumb.Item>
-            </Breadcrumb>
-            <Layout style={{ padding: '24px 0', background: '#fff', minHeight: 'calc(100% - 53px)' }}>
-              <RoutesEach routersConfig = {routers}/>
-            </Layout>
-          </Content>
+          <Route key="global"  render={props =>
+            <div>
+              <Header className="header" style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
+                <div className="logo" />
+                <HerderMenu history={props.history} list={menuItems}/>
+              </Header>
+              <Content style={{ padding: '0 50px', position: 'fixed', zIndex: 1, width: '100%', top: '64px', height: 'calc(100% - 100px)', overflow: 'auto' }}>
+                <Breadcrumb style={{ margin: '16px 0' }}>
+                  {
+                    props.history.location.pathname.split('/').map((path, Index) =>
+                      <Breadcrumb.Item key={Index}><Link to={props.history.location.pathname.split('/').slice(0, Index+1).join('/')}>{path}</Link></Breadcrumb.Item>
+                    )
+                  }
+                </Breadcrumb>
+                <Layout style={{ padding: '24px 0', background: '#fff', minHeight: 'calc(100% - 53px)' }}>
+                  <RoutesEach routersConfig={routers} />
+                </Layout>
+              </Content>
+            </div>
+          }>
+          </Route>
         </Layout>
       </div>
     </Router>

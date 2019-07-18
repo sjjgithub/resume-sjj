@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
   Route,
   Switch,
   Redirect,
@@ -9,27 +8,22 @@ import NotFound from '../../pages/404';
 export class RoutesEachClass {
   routersConfig: Array<any> = [];
 }
-export default class RoutesEach extends React.Component<RoutesEachClass, any> {
-  constructor(props: any) {
-    super(props);
-  }
+export default class RoutesEach extends React.Component<RoutesEachClass> {
   render() {
-
     return (
       <Switch >
-        <Route exact path="/" render={() =>
-          <Redirect to={this.props.routersConfig[0].path}></Redirect>}>
-        </Route>
         {
           this.props.routersConfig.map((route, index) => {
             return (
               <Route
                 key={index}
                 path={route.path}
-                component={route.component} />
+                render={props =>
+                  <route.component childrenRoutes={route.childrenRoutes} {...props} />} />
             )
           })
         }
+        <Redirect exact strict from={this.props.routersConfig[0].path.substring(0, this.props.routersConfig[0].path.lastIndexOf("/")) || '/'} to={this.props.routersConfig[0].path} {...this.props}/>
         <Route component={NotFound} />
       </Switch >
     );

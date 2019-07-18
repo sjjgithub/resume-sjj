@@ -1,19 +1,34 @@
 import React from 'react';
-import mockjs from 'mockjs';
 import { Menu } from 'antd';
-import {Link} from 'react-router-dom';
-export default class HerderMenu extends React.Component {
-  private menuItems = mockjs.mock({ 'data|2': [{ 'name|+1': ['我的主页', '我的项目经验'], 'path|+1': ['/', '/detail/22'] }] }).data;;
+import { Link } from 'react-router-dom';
+import { History } from 'history';
+export interface HerderMenuProps {
+  list: Array<any>;
+  history: History<any>;
+}
+export interface HerderMenuState {
+  active: string;
+}
+export default class HerderMenu extends React.Component<HerderMenuProps, HerderMenuState> {
+  constructor(props:HerderMenuProps){
+    super(props);
+    let findActive = this.props.list.find((item: any) => this.props.history.location.pathname.indexOf(item.path) > -1)
+    this.state = { active: (findActive ? findActive.path : '') };
+  }
+  componentWillReceiveProps(props: HerderMenuProps) { // 父组件重传props时就会调用这个方法
+    let findActive = props.list.find((item: any) => props.history.location.pathname.indexOf(item.path) > -1)
+    this.setState({ active: (findActive ? findActive.path : '') });
+  }
   render() {
     return (
       <Menu
         theme="dark"
         mode="horizontal"
-        defaultSelectedKeys={['1']}
+        selectedKeys={[this.state ? this.state.active : '']}
         style={{ lineHeight: '64px' }}
       >
-        {this.menuItems.map((item: any, index: number) =>
-          <Menu.Item key={index + 1}>
+        {this.props.list.map((item: any, index: number) =>
+          <Menu.Item key={item.path}>
             <Link to={item.path}>{item.name}</Link>
           </Menu.Item>
         )}

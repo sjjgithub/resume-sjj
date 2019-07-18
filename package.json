@@ -11,10 +11,13 @@
     "antd": "^3.20.1",
     "babel-plugin-import": "^1.12.0",
     "customize-cra": "^0.2.14",
+    "less": "^3.9.0",
+    "less-loader": "^5.0.0",
     "mockjs": "^1.0.1-beta3",
     "react": "^16.8.6",
+    "react-app-rewire-hot-loader": "^2.0.1",
     "react-app-rewired": "^2.1.3",
-    "react-dom": "^16.8.6",
+    "react-dom": "npm:@hot-loader/react-dom",
     "react-scripts": "3.0.1",
     "typescript": "3.5.3"
   },
@@ -40,11 +43,24 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.4.4",
     "@types/react-hot-loader": "^4.1.0",
     "@types/react-loadable": "^5.5.1",
     "@types/react-router-dom": "^4.3.4",
     "react-hot-loader": "^4.12.6",
     "react-loadable": "^5.5.0",
     "react-router-dom": "^5.0.1"
-  }
+  },
+  "description": "自我简历\r This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.tsx",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sjjgithub/resume-sjj.git"
+  },
+  "author": "sjj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sjjgithub/resume-sjj/issues"
+  },
+  "homepage": "https://github.com/sjjgithub/resume-sjj#readme"
 }
