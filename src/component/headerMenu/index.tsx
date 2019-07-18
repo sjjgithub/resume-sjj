@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu } from 'antd';
-import { Link } from 'react-router-dom';
+import { NavLink  } from 'react-router-dom';
 import { History } from 'history';
 export interface HerderMenuProps {
   list: Array<any>;
@@ -29,7 +29,7 @@ export default class HerderMenu extends React.Component<HerderMenuProps, HerderM
       >
         {this.props.list.map((item: any, index: number) =>
           <Menu.Item key={item.path}>
-            <Link to={item.path}>{item.name}</Link>
+            <NavLink to={item.path}>{item.name}</NavLink>
           </Menu.Item>
         )}
       </Menu>
