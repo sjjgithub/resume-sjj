@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.less';
 import { hot } from 'react-hot-loader';
 import {
   BrowserRouter as Router,
@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import routers from '../src/router';
 import HerderMenu from './component/headerMenu';
-import { Layout, Breadcrumb } from 'antd';
+import { Layout, Breadcrumb, Avatar } from 'antd';
 import RoutesEach from './component/routesEach';
 import mockjs from 'mockjs';
 const { Header, Content } = Layout;
@@ -26,20 +26,20 @@ const App: React.FC = () => {
       forceRefresh={!supportsHistory}
       keyLength={12}
     >
-
       <div className="App" >
         <Layout>
-          <Route key="global"  render={props =>
+          <Route key="global" render={props =>
             <div>
-              <Header className="header" style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
-                <div className="logo" />
-                <HerderMenu history={props.history} list={menuItems}/>
+              <Header className="header dis-flex flex-vc">
+                <div className="App-logo pointer"><Link to="/">sjj</Link></div>
+                <HerderMenu history={props.history} list={menuItems} />
+                <Avatar size="large" icon="user" />
               </Header>
               <Content style={{ padding: '0 50px', position: 'fixed', zIndex: 1, width: '100%', top: '64px', height: 'calc(100% - 100px)', overflow: 'auto' }}>
                 <Breadcrumb style={{ margin: '16px 0' }}>
                   {
                     props.history.location.pathname.split('/').map((path, Index) =>
-                      <Breadcrumb.Item key={Index}><Link to={props.history.location.pathname.split('/').slice(0, Index+1).join('/')}>{path}</Link></Breadcrumb.Item>
+                      <Breadcrumb.Item key={Index}><Link to={props.history.location.pathname.split('/').slice(0, Index + 1).join('/')}>{path}</Link></Breadcrumb.Item>
                     )
                   }
                 </Breadcrumb>

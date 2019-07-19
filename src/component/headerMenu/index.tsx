@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu } from 'antd';
-import { NavLink  } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { History } from 'history';
 export interface HerderMenuProps {
   list: Array<any>;
@@ -10,7 +10,7 @@ export interface HerderMenuState {
   active: string;
 }
 export default class HerderMenu extends React.Component<HerderMenuProps, HerderMenuState> {
-  constructor(props:HerderMenuProps){
+  constructor(props: HerderMenuProps) {
     super(props);
     let findActive = this.props.list.find((item: any) => this.props.history.location.pathname.indexOf(item.path) > -1)
     this.state = { active: (findActive ? findActive.path : '') };
@@ -22,6 +22,7 @@ export default class HerderMenu extends React.Component<HerderMenuProps, HerderM
   render() {
     return (
       <Menu
+        className="HerderMenu"
         theme="dark"
         mode="horizontal"
         selectedKeys={[this.state ? this.state.active : '']}

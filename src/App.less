@@ -1,0 +1,32 @@
+.App {
+    @import url('./common/base.less');
+    /* text-align: center; */
+    height: 100%;
+    header{
+        position: fixed; z-index: 1000;width: 100%;
+        .HerderMenu{flex: 1;min-width: 500px;overflow-x: auto;}
+    }
+    .App-logo {
+        &:hover{
+            animation: App-logo-spin infinite 20s linear;
+        }
+        // pointer-events: none;
+        font-size: 40px;
+        margin: 0 10px;
+      }
+      @keyframes App-logo-spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      >.ant-layout{
+        height: 100%;
+      }
+  }
+  
+  
+ 
+  
